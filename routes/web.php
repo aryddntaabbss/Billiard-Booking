@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\BookingController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/auth/redirect', [AuthController::class, 'redirectToGoogle'])->name('google.redirect');
@@ -13,3 +15,7 @@ Route::post('/payment/callback', [PaymentController::class, 'callback'])->name('
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/', [BookingController::class, 'index'])->name('landing');
+Route::get('/booking/{meja}', [BookingController::class, 'formBooking'])->name('booking.form');
+Route::post('/booking/{meja}', [BookingController::class, 'storeBooking'])->name('booking.store');
